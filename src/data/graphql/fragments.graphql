@@ -114,6 +114,7 @@ fragment FullColony on Colony {
   canUnlockNativeToken @client
   isInRecoveryMode @client
   isNativeTokenLocked @client
+  coinMachine @client
 }
 
 fragment SuggestionFields on Suggestion {

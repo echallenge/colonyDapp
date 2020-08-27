@@ -74,6 +74,7 @@ export default gql`
     transfers: [Transfer!]!
     unclaimedTransfers: [Transfer!]!
     version: Int!
+    coinMachine: Boolean!
   }
 
   extend type TaskPayout {

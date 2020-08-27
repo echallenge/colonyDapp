@@ -180,6 +180,7 @@ export type Colony = {
   avatarHash?: Maybe<Scalars['String']>;
   canMintNativeToken: Scalars['Boolean'];
   canUnlockNativeToken: Scalars['Boolean'];
+  coinMachine: Scalars['Boolean'];
   colonyAddress: Scalars['String'];
   colonyName: Scalars['String'];
   createdAt: Scalars['DateTime'];
@@ -1414,7 +1415,7 @@ export type ColonyProfileFragment = Pick<Colony, 'id' | 'colonyAddress' | 'colon
 export type DomainFieldsFragment = Pick<Domain, 'id' | 'ethDomainId' | 'name' | 'ethParentDomainId'>;
 
 export type FullColonyFragment = (
-  Pick<Colony, 'isNativeTokenExternal' | 'version' | 'canMintNativeToken' | 'canUnlockNativeToken' | 'isInRecoveryMode' | 'isNativeTokenLocked'>
+  Pick<Colony, 'isNativeTokenExternal' | 'version' | 'canMintNativeToken' | 'canUnlockNativeToken' | 'isInRecoveryMode' | 'isNativeTokenLocked' | 'coinMachine'>
   & { domains: Array<DomainFieldsFragment>, roles: Array<(
     Pick<UserRoles, 'address'>
     & { domains: Array<Pick<DomainRoles, 'domainId' | 'roles'>> }
@@ -2416,6 +2417,7 @@ export const FullColonyFragmentDoc = gql`
   canUnlockNativeToken @client
   isInRecoveryMode @client
   isNativeTokenLocked @client
+  coinMachine @client
 }
     ${ColonyProfileFragmentDoc}
 ${TokensFragmentDoc}
