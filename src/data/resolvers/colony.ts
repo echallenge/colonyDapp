@@ -208,5 +208,19 @@ export const colonyResolvers = ({
       const version = await colonyClient.version();
       return version.toString();
     },
+    /**
+     * @NOTE Manually change the colony network contract version
+     * In src/lib/colonyNetwork/contracts/colony/Colony.sol line 30
+     * to return version 5
+     */
+    async coinMachine({
+      colonyAddress,
+    }): Promise<ClientType.CoinMachineClient> {
+      const coinMachine = await colonyManager.getClient(
+        ClientType.CoinMachineClient,
+        colonyAddress,
+      );
+      return coinMachine;
+    },
   },
 });
