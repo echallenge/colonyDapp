@@ -76,6 +76,7 @@ const ColonyMeta = ({
     nativeTokenAddress,
     tokens,
     website = '',
+    coinMachine,
   },
   filteredDomainId,
   colony,
@@ -162,11 +163,13 @@ const ColonyMeta = ({
           {renderExpandedElements}
         </section>
       )}
-      <ColonyBuyTokens
-        colonyName={colonyName}
-        nativeTokenAddress={nativeTokenAddress}
-        tokens={tokens}
-      />
+      {coinMachine && (
+        <ColonyBuyTokens
+          colonyName={colonyName}
+          nativeTokenAddress={nativeTokenAddress}
+          tokens={tokens}
+        />
+      )}
       <ColonyPrograms
         canAdminister={canAdminister}
         colonyAddress={colonyAddress}
