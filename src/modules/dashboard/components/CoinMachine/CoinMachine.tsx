@@ -10,12 +10,13 @@ import { Address } from '~types/index';
 import { useDialog } from '~core/Dialog';
 import Confetti from '~core/Confetti';
 
+import CoinMachineChat from './CoinMachineChat';
 import CoinMachineWelcomeDialog from './CoinMachineWelcomeDialog';
+import PostPurchaseCard from './PostPurchaseCard';
 import PreviousSalesCard from './PreviousSalesCard';
+import PurchaseCard from './PurchaseCard';
 import TimeRemainingCard from './TimeRemainingCard';
 import TokensRemainingCard from './TokensRemainingCard';
-import CoinMachineChat from './CoinMachineChat';
-import PostPurchaseCard from './PostPurchaseCard';
 
 import { PurchaseStatus } from './types';
 
@@ -135,7 +136,15 @@ const CoinMachine = ({
           />
         ) : (
           <div className={styles.purchaseGrid}>
-            <div className={styles.buyCLNY} />
+            <div className={styles.buyTokens}>
+              <PurchaseCard
+                priceEth={bigNumberify(
+                  salesData[salesData.length - 1].priceEth,
+                )}
+                token={nativeToken}
+                tokensRemaining={tokensRemaining}
+              />
+            </div>
             <div className={styles.timeRemaining}>
               <TimeRemainingCard
                 msRemaining={timeRemaining}

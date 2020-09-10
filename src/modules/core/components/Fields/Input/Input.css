@@ -8,6 +8,11 @@
   position: relative;
 }
 
+.container.marginNone {
+  /* Use `important` to ensure `.container` margin rules are overwritten */
+  margin: 0 !important;
+}
+
 .extensionContainer {
   display: inline-flex;
   width: 100%;

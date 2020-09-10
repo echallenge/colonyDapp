@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { MessageDescriptor } from 'react-intl';
 
-import { getTokenDecimalsWithFallback } from '~utils/tokens';
+import Heading from '~core/Heading';
 import { AnyTokens } from '~data/index';
 import { Address } from '~types/index';
+import { getTokenDecimalsWithFallback } from '~utils/tokens';
 
 import Select from '../Select';
 import Input from '../Input';
@@ -55,20 +56,27 @@ const AmountTokens = ({
             numeral: true,
             numeralDecimalScale: decimals,
           }}
+          id={`${id}-amount`}
           label={label}
           name={nameAmount}
-          id={`${id}-amount`}
         />
       </div>
       <div>
-        <Select
-          appearance={{ theme: 'grey', width: 'strict' }}
-          elementOnly
-          label={label}
-          name={nameToken}
-          options={tokenOptions}
-          id={`${id}-token`}
-        />
+        {selectedToken && tokenOptions.length === 1 ? (
+          <Heading
+            appearance={{ margin: 'none', size: 'medium' }}
+            text={selectedToken.symbol}
+          />
+        ) : (
+          <Select
+            appearance={{ theme: 'grey', width: 'strict' }}
+            elementOnly
+            label={label}
+            name={nameToken}
+            options={tokenOptions}
+            id={`${id}-token`}
+          />
+        )}
       </div>
     </div>
   );

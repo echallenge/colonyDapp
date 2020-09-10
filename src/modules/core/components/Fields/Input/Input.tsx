@@ -19,6 +19,7 @@ export interface Appearance {
   direction?: 'horizontal';
   colorSchema?: 'dark' | 'grey' | 'transparent';
   helpAlign?: 'right';
+  margin?: 'none';
   size?: 'small' | 'medium';
   statusSchema?: 'info';
 }
@@ -63,6 +64,9 @@ export interface Props extends Omit<InputComponentProps, 'placeholder'> {
   /** Placeholder text values for intl interpolation */
   placeholderValues?: SimpleMessageValues;
 
+  /** Content to render below the input, and above the status */
+  subContent?: ReactNode;
+
   /** Status text */
   status?: string | MessageDescriptor;
 
@@ -85,8 +89,10 @@ const Input = ({
   name,
   placeholder: placeholderProp,
   placeholderValues,
+  subContent,
   status,
   statusValues,
+  ...rest
 }: Props) => {
   const [id] = useState(idProp || nanoid());
   const { formatMessage } = useIntl();
@@ -105,6 +111,7 @@ const Input = ({
     innerRef,
     name,
     placeholder,
+    ...rest,
     ...inputFieldProps,
   };
 
@@ -115,6 +122,7 @@ const Input = ({
 
   const containerClasses = cx(styles.container, {
     [styles.containerHorizontal]: appearance.direction === 'horizontal',
+    [styles.marginNone]: appearance.margin === 'none',
   });
   return (
     <div className={containerClasses}>
@@ -134,6 +142,7 @@ const Input = ({
           <div className={styles.extension}>{extensionStringText}</div>
         )}
       </div>
+      {subContent && subContent}
       {!elementOnly && (
         <InputStatus
           appearance={appearance}
